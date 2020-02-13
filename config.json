@@ -23,13 +23,15 @@
   "finetuning_task": null,
   "id2label": {
     "0": "LABEL_0",
-    "1": "LABEL_1"
+    "1": "LABEL_1",
+    "2": "LABEL_2"
   },
   "init_std": 0.02,
   "is_decoder": false,
   "label2id": {
     "LABEL_0": 0,
-    "LABEL_1": 1
+    "LABEL_1": 1,
+    "LABEL_2": 2
   },
   "length_penalty": 1.0,
   "max_length": 20,
@@ -37,7 +39,7 @@
   "model_type": "bart",
   "num_beams": 1,
   "num_hidden_layers": 12,
-  "num_labels": 2,
+  "num_labels": 3,
   "num_return_sequences": 1,
   "output_attentions": false,
   "output_hidden_states": false,
