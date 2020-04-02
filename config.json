@@ -12,6 +12,7 @@
   "decoder_ffn_dim": 4096,
   "decoder_layerdrop": 0.0,
   "decoder_layers": 12,
+  "decoder_start_token_id": 2,
   "do_sample": false,
   "dropout": 0.1,
   "encoder_attention_heads": 16,
@@ -45,6 +46,16 @@
   "prefix": " ",
   "pruned_heads": {},
   "repetition_penalty": 1.0,
+  "task_specific_params": {
+    "summarization": {
+      "early_stopping": true,
+      "length_penalty": 2.0,
+      "max_length": 142,
+      "min_length": 56,
+      "no_repeat_ngram_size": 3,
+      "num_beams": 4
+    }
+  },
   "temperature": 1.0,
   "top_k": 50,
   "top_p": 1.0,
