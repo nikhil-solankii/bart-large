@@ -1,15 +1,62 @@
 ---
-license: mit
-thumbnail: https://huggingface.co/front/thumbnails/facebook.png
+license: apache-2.0
+language: en
 ---
 
-The Bart model was proposed by Mike Lewis, Yinhan Liu, Naman Goyal, Marjan Ghazvininejad, Abdelrahman Mohamed, Omer Levy, Ves Stoyanov and Luke Zettlemoyer on 29 Oct, 2019. According to the abstract,
+# BART (large-sized model) 
 
-Bart uses a standard seq2seq/machine translation architecture with a bidirectional encoder (like BERT) and a left-to-right decoder (like GPT).
+BART model pre-trained on English language. It was introduced in the paper [BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension](https://arxiv.org/abs/1910.13461) by Lewis et al. and first released in [this repository](https://github.com/pytorch/fairseq/tree/master/examples/bart). 
 
-The pretraining task involves randomly shuffling the order of the original sentences and a novel in-filling scheme, where spans of text are replaced with a single mask token.
+Disclaimer: The team releasing BART did not write a model card for this model so this model card has been written by the Hugging Face team.
 
-BART is particularly effective when fine tuned for text generation but also works well for comprehension tasks. It matches the performance of RoBERTa with comparable training resources on GLUE and SQuAD, achieves new state-of-the-art results on a range of abstractive dialogue, question answering, and summarization tasks, with gains of up to 6 ROUGE.
+## Model description
 
-The Authors’ code can be found here:
-https://github.com/pytorch/fairseq/tree/master/examples/bart
+BART is a transformer encoder-encoder (seq2seq) model with a bidirectional (BERT-like) encoder and an autoregressive (GPT-like) decoder. BART is pre-trained by (1) corrupting text with an arbitrary noising function, and (2) learning a model to reconstruct the original text.
+
+BART is particularly effective when fine-tuned for text generation (e.g. summarization, translation) but also works well for comprehension tasks (e.g. text classification, question answering).
+
+## Intended uses & limitations
+
+You can use the raw model for text infilling. However, the model is mostly meant to be fine-tuned on a supervised dataset. See the [model hub](https://huggingface.co/models?search=bart) to look for fine-tuned versions on a task that interests you.
+
+### How to use
+
+Here is how to use this model in PyTorch:
+
+```python
+from transformers import BartTokenizer, BartModel
+
+tokenizer = BartTokenizer.from_pretrained('facebook/bart-large')
+model = BartModel.from_pretrained('facebook/bart-large')
+
+inputs = tokenizer("Hello, my dog is cute", return_tensors="pt")
+outputs = model(**inputs)
+
+last_hidden_states = outputs.last_hidden_state
+```
+
+### BibTeX entry and citation info
+
+```bibtex
+@article{DBLP:journals/corr/abs-1910-13461,
+  author    = {Mike Lewis and
+               Yinhan Liu and
+               Naman Goyal and
+               Marjan Ghazvininejad and
+               Abdelrahman Mohamed and
+               Omer Levy and
+               Veselin Stoyanov and
+               Luke Zettlemoyer},
+  title     = {{BART:} Denoising Sequence-to-Sequence Pre-training for Natural Language
+               Generation, Translation, and Comprehension},
+  journal   = {CoRR},
+  volume    = {abs/1910.13461},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1910.13461},
+  eprinttype = {arXiv},
+  eprint    = {1910.13461},
+  timestamp = {Thu, 31 Oct 2019 14:02:26 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1910-13461.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
